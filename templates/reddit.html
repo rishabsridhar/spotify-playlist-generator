@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Spotify Playlist Generator</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    </head>
+
+    <body>
+        <h1>Reddit's r/listentothis Playlist Generator!</h1>
+        <h3>Enter your Spotify username and the name of your playlist.</h3>
+
+        <div>Spotify Username: <input id='spotify_username'></div>
+        <div>Playlist Name: <input id='playlist_name'></div>
+
+        <button id='get_reddit_songs'>Get Reddit Songs</button> <div id='added_songs'></div>
+        
+        {% if data != None %}
+            <br>
+            <button id='add_reddit_songs'>Add Reddit Songs</button>
+            {% for track in data %}
+                <p class='reddit_songs'>{{ track.artists[0].name }} - {{ track.name }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <script>
+
+            $(document).ready(function() {
+            
+                $('#get_reddit_songs').click(function() {
+                    console.log('get was clicked')
+                    $.ajax({
+                        url: "/_get_reddit_songs",
+                        type: "POST",
+                        datatype: 'json',
+                        data: JSON.stringify({
+                            'spotify_username': $('#spotify_username').val(),
+                            'playlist_name': $('#playlist_name').val()
+                        }),
+                        success: function (response) {
+                            console.log('success!')
+                            document.write(response)
+                        },
+                        error: function (xhr) {
+                            console.log('ERROR')
+                            console.log(xhr)
+                        }
+                    });
+                });
+            })
+
+            $(document).on('click', '#add_reddit_songs', function() {
+                console.log('add was clicked')
+                $('#added_songs').html('Songs added! Redirecting to homepage...')
+                $('.reddit_songs').html('')
+                $.ajax({
+                    url: "/_add_reddit_songs",
+                    type: "POST",
+                    datatype: 'json',
+                    data: JSON.stringify({
+                        'spotify_username': $('#spotify_username').val(),
+                        'playlist_name': $('#playlist_name').val()
+                    }),
+                    success: function (response) {
+                        console.log('success! Songs added!')
+                        window.location.href = 'http://localhost:5000/'
+                    },
+                    error: function (xhr) {
+                        console.log('ERROR')
+                        console.log(xhr)
+                    }
+                });
+            });
+
+        </script>
+        
+    </body>
+
+</html>
