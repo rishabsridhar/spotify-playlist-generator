@@ -162,7 +162,7 @@ def generate_playlist(data, explicit, limit=50):
         track_ids = [sp.get_track_id(i) for i in tracks if sp.get_track_id(i) != None]
     seed_genres = [i for i in genres if i in sp.recommendation_genre_seeds()]
     
-    playlist_id = sp.get_playlist_id(playlist_name)
+    #playlist_id = sp.get_playlist_id(playlist_name)
 
     top_track_ids = []
     lim = 5
