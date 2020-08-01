@@ -156,7 +156,6 @@ def generate_playlist(data, explicit, limit=50):
     track_ids = []
     sp = SpotifyOAuthManager(username)
     if artists != ['']:
-        print('artist', artist_ids)
         artist_ids = [sp.get_artist_id(i) for i in artists if sp.get_artist_id(i) != None]
     if tracks != ['']:
         track_ids = [sp.get_track_id(i) for i in tracks if sp.get_track_id(i) != None]
