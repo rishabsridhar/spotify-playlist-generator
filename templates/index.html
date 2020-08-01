@@ -3,19 +3,35 @@
     <head>
         <title>Spotify Playlist Generator</title>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Lato', sans-serif;
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index_style.css') }}">
     </head>
 
     <body>
-        <h1>Spotify Playlist Generator!</h1>
+        
+        <div class="top-nav">
+            <a class= 'active' href="http://localhost:5000/">Home</a>
+            <a href="http://localhost:5000/playlist_generator">Playlist Generator</a>
+            <a href="http://localhost:5000/reddit">Reddit Playlist</a>
+        </div>
+
+        <h1 class="centered">Spotify Playlist Generator!</h1>
         <h3>Click which playlist type you want to create.</h3>
 
-        <form action='http://localhost:5000/reddit'>
-            <button id='go_to_reddit'>Reddit Playlist</button>
-        </form>
+        <div id='main_buttons'>
+            <form action='http://localhost:5000/reddit'>
+                <button id='go_to_reddit' class='button'>Reddit Playlist</button>
+            </form>
 
-        <form action='http://localhost:5000/playlist_generator'>
-            <button id='go_to_playlist_generator'>Standard Playlist Generator</button>
-        </form>   
+            <form action='http://localhost:5000/playlist_generator'>
+                <button id='go_to_playlist_generator' class='button'>Standard Playlist Generator</button>
+            </form> 
+        </div>  
         
     </body>
 
