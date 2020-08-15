@@ -118,16 +118,34 @@ class SpotifyOAuthManager:
         username = self.username if username=='' else username
         self.sp.user_playlist_add_tracks(username, playlist_id, list_track_ids[:99])
 
+    def check_none(self, seed_artists, seed_tracks, seed_genres, val):
+        seed_tracks = val if (seed_tracks==None or len(seed_tracks) == 0) else seed_tracks
+        seed_artists = val if (seed_artists==None or len(seed_artists) == 0) else seed_artists
+        seed_genres = val if (seed_genres==None or len(seed_genres) == 0) else seed_genres
+        return seed_artists, seed_tracks, seed_genres
 
-    def recommendations(self, seed_tracks=None, seed_artists=None, seed_genres=None, limit=20):
+    def recommendations(self, seed_tracks=[], seed_artists=[], seed_genres=[], limit=20):
+        seed_artists, seed_tracks, seed_genres = self.check_none(seed_artists, seed_tracks, seed_genres, [])
+        if len(seed_artists) + len(seed_genres) + len(seed_tracks) > 5:
+            return {'tracks': self.recommendations(seed_artists=seed_artists[:5])['tracks'] + 
+                        self.recommendations(seed_tracks=seed_tracks[:5])['tracks'] + 
+                        self.recommendations(seed_genres=seed_genres[:5])['tracks']
+                    }
+        seed_artists, seed_tracks, seed_genres = self.check_none(seed_artists, seed_tracks, seed_genres, None)
         return self.sp.recommendations(seed_tracks=seed_tracks, seed_artists=seed_artists, seed_genres=seed_genres, limit=limit)
 
     def recommendation_ids(self, recommendations={'tracks':[]}, explicit=False):
         list_track_ids = []
-        for track in recommendations['tracks']:
-            if not explicit and track['explicit']:
-                continue   
-            list_track_ids.append(track['id'])
+        if isinstance(recommendations, dict):
+            for track in recommendations['tracks']:
+                if not explicit and track['explicit']:
+                    continue   
+                list_track_ids.append(track['id'])
+        elif isinstance(recommendations, list):
+            for track in recommendations:
+                if not explicit and track['explicit']:
+                    continue   
+                list_track_ids.append(track['id'])
         return list_track_ids
 
     def recommendation_genre_seeds(self):

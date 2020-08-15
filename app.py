@@ -4,6 +4,7 @@ from spotify_manager import generate_playlist
 import json
 import sys
 import time
+import webbrowser
 
 app = Flask(__name__)
 
@@ -93,4 +94,6 @@ def _add_reddit_songs():
 
 
 if __name__ == '__main__':
+    #webbrowser.open_new_tab('http://localhost:5000')
     app.run(port=5000)
+    
