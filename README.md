@@ -1,6 +1,8 @@
 # spotify-playlist-generator
 A Web App that can create Spotify Playlists by either scraping songs from Reddit or by generating a playlist based on user-inputted data (artists, tracks, genres).
 
+Currently the web app is functional and can successfully generate playlists based on the subreddit r/listentothis or on user-inputted data. You should enter your Spotify Username/User ID as it may not be the same as your display name. Requires Spotify Premium.
+
 # setup
 1. Create a text file called client_credentials.txt and have line 1 be your client_id and line 2 be your client_secret.
 2. If you want Reddit songs, fill in config.py with your reddit bot credentials as stated.
@@ -29,6 +31,3 @@ Stores all of the Javascript and CSS for the webpages. The files pg_script.js an
 
 ## templates
 Stores the HTML5 for the homepage, the Reddit generator, and the Standard playlist generator. The latter two use Jinja2 syntax to display a list of songs before adding them to a playlist.
-
-
-Currently the web app is functional and can successfully generate playlists based on the subreddit r/listentothis or on user-inputted data. You should enter your Spotify Username/User ID as it may not be the same as your display name. Requires Spotify Premium.
