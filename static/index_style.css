@@ -1,5 +1,7 @@
 body {
-    background-color:#D0D0FE;
+    background-color: #252525;
+    color: #00db49;
+    text-shadow: 1.5px 1.5px black;
     font-family: 'Lato', sans-serif;
     text-align: center;
     align-content: center;
@@ -32,13 +34,15 @@ h1 {
 
 
 .top-nav {
-    background-color: darkblue;
+    background-color: #00db49;
     overflow: hidden;
 }
 
 .top-nav a {
     float: left;
-    color: #f2f2f2;
+    /*color: #f2f2f2;*/
+    text-shadow: 0px 0px;
+    color: black;
     text-align: center;
     padding: 14px 16px;
     padding-left: 20px;
@@ -55,8 +59,9 @@ h1 {
 }
 
 .top-nav a.active {
-    background-color: blue;
+    background-color: #00db49;
     color: white;
+    text-shadow: 1.5px 1.5px black;
 }
 
 
